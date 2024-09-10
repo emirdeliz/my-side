@@ -4,12 +4,14 @@ import { Col, Flex, Row, Title } from "@atoms"
 import { useCategoryService, useProductService } from "@services";
 import { InputForm, Table } from "@molecules";
 import { DropdownForm } from "@organisms";
+import { useRouter } from "next/router";
 
 const NUM_PRODUCTS_PER_PAGE = 4;
 
 const NUM_PRODUCTS_TOTAL = 150;
 
 export const HomePage = () => {
+  const router = useRouter()
   const { getProducts } = useProductService();
   const { getCategories } = useCategoryService();
   const [page, setPage] = useState<number>(1);
@@ -40,7 +42,7 @@ export const HomePage = () => {
   }
 
   const numOfPages = useMemo(() => {
-    return NUM_PRODUCTS_TOTAL / NUM_PRODUCTS_PER_PAGE;
+    return products?.length / NUM_PRODUCTS_PER_PAGE;
   }, [products]);
 
   return (
@@ -69,12 +71,12 @@ export const HomePage = () => {
           columns={[
             { key: 'title', label: 'Nome' },
             { key: 'price', label: 'Preço', currency: true },
-            { key: 'image', label: 'Imagem', customCellRender: (p) => <img src={p.image} style={{ width: 100, margin: 'auto' }} /> },
+            { key: 'image', label: 'Imagem', customCellRender: (p) => <img src={p.image} style={{ width: 100 }} /> },
             { key: 'description', label: 'Descrição' },
           ]}
           dataSource={products}
           onChangePage={(p) => setPage(p)}
-          onRowClick={(p) => console.log(p)}
+          onRowClick={(p) => router.push(`/product/${p.id}`)}
         />
       ) : (
         <Flex.Center hFull wFull mt7>
