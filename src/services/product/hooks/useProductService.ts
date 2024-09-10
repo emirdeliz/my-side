@@ -1,4 +1,4 @@
-import { getProductsApi, ProductModel } from '@api';
+import { getProductApi, getProductsApi, ProductModel } from '@api';
 import { useService } from '../../hooks/useService';
 
 export const useProductService = () => {
@@ -9,7 +9,13 @@ export const useProductService = () => {
     return response;
   };
 
+  const getProduct = async (id: string) => {
+    const response = await callApi<ProductModel>(getProductApi, id);
+    return response;
+  };
+
   return {
+    getProduct,
     getProducts,
   };
 };

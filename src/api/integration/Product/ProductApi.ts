@@ -13,3 +13,7 @@ export const getProductsApi = async (page: number, limit: number, filterCategory
   
   return (await Api<ProductModel>().all({ url }))?.products as Array<ProductModel>;
 };
+
+export const getProductApi = async (id: number) => {
+  return (await Api<ProductModel>().get({ url: `${URL_API_BASE_PRODUCTS}/${id}` }))?.product as ProductModel;
+}

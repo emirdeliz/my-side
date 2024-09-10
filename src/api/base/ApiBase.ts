@@ -16,6 +16,7 @@ interface PutRequestParams<BodyDataType> extends PostRequestParams<BodyDataType>
 interface PatchRequestParams<BodyDataType> extends PostRequestParams<BodyDataType> {}
 
 interface ApiResponse<T> {
+  product?: T;
   products?: T;
   categories?: T;
 }
