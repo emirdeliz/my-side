@@ -4,8 +4,8 @@ import { useService } from '../../hooks/useService';
 export const useProductService = () => {
   const { callApi } = useService();
 
-  const getProducts = async (page: number, limit: number, filterCategory?: string) => {
-    const response = await callApi<Array<ProductModel>>(getProductsApi, page, limit, filterCategory);
+  const getProducts = async (filterCategory?: string, filterName?: string) => {
+    const response = await callApi<Array<ProductModel>>(getProductsApi, filterCategory, filterName);
     return response;
   };
 
