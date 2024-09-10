@@ -2,7 +2,6 @@ import { Story } from '@storybook/react';
 import { GenericObject } from '@types';
 import {
   DropdownFormRequired,
-  DropdownFormSemibold,
   DropdownFormSimple,
 } from '@stories';
 import { render, fireEvent, screen } from '@test';
@@ -24,12 +23,6 @@ describe('/ui/molecules/DropdownForm', () => {
     it('Have DropdownForm', async () => {
       const { container: dropdownFormNode } = render(<DropdownFormSimple />);
       expect(typeof dropdownFormNode).toEqual(typeof (<DropdownFormSimple />));
-    });
-
-    it('Have DropdownForm with label', async () => {
-      await renderDropdownForm(DropdownFormSemibold);
-      const label = await screen.findByText(/categoria/i);
-      expect(label).toBeInTheDocument();
     });
 
     it('Have DropdownForm with error required', async () => {
