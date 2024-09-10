@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 3000;
 
-const useDebounce = <T>(debouncedItem: () => T) => {
+export const useDebounce = <T>(debouncedItem: () => T) => {
   const [timeOutId, setTimeOutId] = useState<NodeJS.Timeout>();
   const debouncedValue = useRef<() => T>(debouncedItem);
   useEffect(() => {
@@ -26,5 +26,3 @@ const useDebounce = <T>(debouncedItem: () => T) => {
     setTimeOutId(newTimeoutId);
   };
 };
-
-export default useDebounce;
