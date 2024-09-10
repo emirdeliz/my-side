@@ -1,0 +1,81 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@atoms": [
+        "src/ui/atoms"
+      ],
+      "@molecules": [
+        "src/ui/molecules"
+      ],
+      "@organisms": [
+        "src/ui/organisms"
+      ],
+      "@components": [
+        "src/ui/components"
+      ],
+      "@templates": [
+        "src/ui/templates"
+      ],
+      "@theme": [
+        "src/ui/system/theme"
+      ],
+      "@i18n": [
+        "src/ui/system/i18n"
+      ],
+      "@pages": [
+        "src/ui/pages"
+      ],
+      "@stories": [
+        "src/ui/stories"
+      ],
+      "@hooks": [
+        "src/hooks"
+      ],
+      "@helpers": [
+        "src/helpers"
+      ],
+      "@types": [
+        "src/types"
+      ],
+      "@utils": [
+        "src/utils"
+      ],
+      "@api": [
+        "src/api"
+      ],
+      "@services": [
+        "src/services"
+      ],
+      "@test": [
+        "test"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

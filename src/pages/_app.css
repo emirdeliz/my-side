@@ -1,0 +1,6 @@
+@import url("../assets/fontello/css/fontello.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;600;800&display=swap");
+
+* {
+  font-family: Poppins,sans-serif !important;
+}
