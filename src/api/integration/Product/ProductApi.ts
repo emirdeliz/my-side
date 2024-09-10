@@ -5,13 +5,15 @@ const URL_API_BASE_PRODUCTS = 'products';
 
 const URL_API_BASE_PRODUCTS_BY_CATEGORY = `${URL_API_BASE_PRODUCTS}/category`;
 
-export const getProductsApi = async (page: number, limit: number, filterCategory?: string) => {
-  const urlParams = `&page=${page}&limit=${limit}`;
+export const getProductsApi = async (filterCategory?: string, filterName?: string) => {
   const url = filterCategory && filterCategory !== 'todos'
-    ? `${URL_API_BASE_PRODUCTS_BY_CATEGORY}?type=${filterCategory}${urlParams}`
-    : `${URL_API_BASE_PRODUCTS}?${urlParams}`;
+    ? `${URL_API_BASE_PRODUCTS_BY_CATEGORY}?type=${filterCategory}`
+    : `${URL_API_BASE_PRODUCTS}`;
   
-  return (await Api<ProductModel>().all({ url }))?.products as Array<ProductModel>;
+  const result = (await Api<ProductModel>().all({ url }))?.products as Array<ProductModel>;
+  return result?.filter((p) => {
+    return !filterName || p.title?.toLowerCase().includes(filterName.toLowerCase())
+  })
 };
 
 export const getProductApi = async (id: number) => {
