@@ -1,19 +1,15 @@
 import styled from "styled-components";
 
-const HEADER_HEIGHT = '85px';
-const CONTENT_PADDING = '15px';
-
 export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${HEADER_HEIGHT};
   border-bottom: solid 1px ${({ theme }) => theme.colors.N4};
-  padding: ${({ theme }) => theme.padding.Xs};
+  padding: ${({ theme }) => theme.padding.Sm};
 `;
 
 export const Content = styled.div`
-  padding: ${CONTENT_PADDING};
+  padding: ${({ theme }) => theme.padding.Sm};
   flex: 1;
 `;
 

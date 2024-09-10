@@ -43,13 +43,14 @@ export const TableHeader = <T extends GenericObject>({
 
   const buildHead = useCallback(() => {
     const result = columns?.map((column, index) => {
-      const { label } = column;
+      const { label, minWidth } = column;
       const isSortAsc = sorterColumnStatus === TableSort.ASC;
       const isCurrentColumnSort = index === sorterColumnIndex;
       return (
         <S.HeadColumn
           key={index}
           role="columnheader"
+          style={{ minWidth }}
           onClick={() => sortData(index)}
         >
           <Flex.Row wFull alignCenter>

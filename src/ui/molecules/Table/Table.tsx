@@ -9,6 +9,7 @@ export interface TableColumnProps<T> {
   sorterKey?: keyof T;
   key: keyof T;
   label?: ReactNode;
+  minWidth?: number;
   customCellRender?: (value: T) => ReactNode;
 }
 
