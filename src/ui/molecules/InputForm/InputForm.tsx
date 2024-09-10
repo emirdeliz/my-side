@@ -1,5 +1,4 @@
-import { ReactNode, useMemo } from 'react';
-import { Flex, Input, InputProps } from '@atoms';
+import { Input, InputProps } from '@atoms';
 import { FormGroup } from '../FormGroup/FormGroup';
 
 export interface InputFormProps extends Omit<InputProps, 'onChange'> {
@@ -16,7 +15,7 @@ export const InputForm = ({
 }: InputFormProps) => {
   const id = children ? children.replace(/\s/g, '_') : String(props.id);
   return (
-    <FormGroup label={children} target={id} {...props}>
+    <FormGroup label={children} target={id} {...props} fw3>
       <Input
         {...props}
         id={id}
