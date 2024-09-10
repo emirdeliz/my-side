@@ -95,7 +95,7 @@ export const Dropdown = <T extends GenericObject>({
         }, 300);
       }}
     >
-      <Title fs1 ellipsis n3={!hasSelectedItem} p1={hasSelectedItem}>
+      <Title fs1 n3={!hasSelectedItem} p1={hasSelectedItem}>
         {selectedItem.label || placeholder || ''}
       </Title>
       <S.IconArrow>
