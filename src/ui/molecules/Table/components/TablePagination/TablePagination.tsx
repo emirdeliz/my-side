@@ -25,26 +25,27 @@ export const TablePagination = ({
   onChangePage,
 }: TablePaginationProps) => {
   const MAGIC_MINIMAL_INDEXES = 7;
-  const [currentIndex, setCurrentIndex] = useState<number | null>(page || 1);
+  const [currentIndex, setCurrentIndex] = useState<number | undefined>((page || 0) > 1 ? page : 1);
   const [pages, setPages] = useState<PageProps[]>([]);
+  const numOfPagesBase = numOfPages > 1 ? numOfPages : 1;
 
   useEffect(() => {
     formatInitialPages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex]);
+    setCurrentIndex((page || 0) > 1 ? page : 1);
+  }, [currentIndex, numOfPagesBase]);
 
   const isInTheFirstFiveCharacters = (pageIndex: number): boolean => {
     return pageIndex < 5;
   };
 
   const isInTheLastFiveCharacters = (pageIndex: number): boolean => {
-    const startLastFiveIndexes = numOfPages - 5;
+    const startLastFiveIndexes = numOfPagesBase - 5;
     return pageIndex > startLastFiveIndexes;
   };
 
   const mapStructurePages = (): PageProps[] => {
     const pages = [];
-    for (let index = 1; index <= numOfPages; index++) {
+    for (let index = 1; index <= numOfPagesBase; index++) {
       pages.push({
         index,
         isActive: false,
@@ -120,7 +121,7 @@ export const TablePagination = ({
 
   const formatInitialPages = () => {
     const pagesStructured = mapStructurePages();
-    if (numOfPages > MAGIC_MINIMAL_INDEXES && currentIndex) {
+    if (numOfPagesBase > MAGIC_MINIMAL_INDEXES && currentIndex) {
       if (isInTheFirstFiveCharacters(currentIndex)) {
         setPages(mountFirstFivePagesMode(pagesStructured));
       } else if (isInTheLastFiveCharacters(currentIndex)) {
