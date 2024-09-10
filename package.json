@@ -46,6 +46,6 @@
     "prettier": "^2.7.1",
     "ts-jest": "29.0.5",
     "tsconfig-paths-webpack-plugin": "4.0.1",
-    "typescript": "5.5.0"
+    "typescript": "5.4.5"
   }
 }
