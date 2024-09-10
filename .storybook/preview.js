@@ -13,7 +13,6 @@ import {
   ZIndex,
 } from '@theme';
 import { Loading, LoadingProvider } from '@atoms';
-import { Toast, ToastProvider } from '@molecules';
 import GlobalStyle from '../src/pages/global.style.ts';
 import '../src/assets/fontello/css/fontello.css';
 import '../src/pages/_app.css';
@@ -47,12 +46,9 @@ export const decorators = [
       }}
     >
       <LoadingProvider>
-        <ToastProvider>
-          <Story />
-          <GlobalStyle />
-          <Toast />
-          <Loading.Global />
-        </ToastProvider>
+        <Story />
+        <GlobalStyle />
+        <Loading.Global />
       </LoadingProvider>
     </ThemeProvider>
   ),

@@ -14,9 +14,6 @@ module.exports = {
     '../src/ui/stories/**/*.stories.@(ts|tsx)',
   ],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    'storybook-addon-designs',
   ],
   webpackFinal: async (config) => {
     config.node = {
