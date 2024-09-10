@@ -1,36 +1,67 @@
 import { useEffect, useMemo, useState } from "react";
 import { ProductModel } from "@api";
-import { Flex } from "@atoms"
-import { useProductService } from "@services";
-import { Table } from "@molecules";
+import { Col, Flex, Row, Title } from "@atoms"
+import { useCategoryService, useProductService } from "@services";
+import { InputForm, Table } from "@molecules";
+import { DropdownForm } from "@organisms";
 
 const NUM_PRODUCTS_PER_PAGE = 4;
 
-export const HomePage = () => { 
+const NUM_PRODUCTS_TOTAL = 150;
+
+export const HomePage = () => {
   const { getProducts } = useProductService();
-  const [page, setPage] = useState<number>(0);
+  const { getCategories } = useCategoryService();
+  const [page, setPage] = useState<number>(1);
   const [products, setProducts] = useState<Array<ProductModel>>([]);
+  const [categories, setCategories] = useState<Array<string>>([]);
+  const [filterName, setFilterName] = useState<string>('');
+  const [filterCategory, setFilterCategory] = useState<string>('');
 
   useEffect(() => {
-    initialize()
+    initialize();
   }, []);
 
+  useEffect(() => {
+    getAllProducts();
+  }, [page, filterCategory, filterName]);
+
   const initialize = async () => {
-    const result = await getProducts();
-    setProducts(result);
+    const categories = await getCategories();
+    categories.unshift('todos');
+    setCategories(categories);
+  }
+
+  const getAllProducts = async () => { 
+    const products = await getProducts(page, NUM_PRODUCTS_PER_PAGE, filterCategory);
+    setProducts(products?.filter((p) => {
+      return !filterName || p.title?.toLowerCase().includes(filterName.toLowerCase())
+    }));
   }
 
   const numOfPages = useMemo(() => {
-    return products.length / NUM_PRODUCTS_PER_PAGE;
+    return NUM_PRODUCTS_TOTAL / NUM_PRODUCTS_PER_PAGE;
   }, [products]);
-
-  const productsPerPage = useMemo(() => {
-    return products.slice(page * NUM_PRODUCTS_PER_PAGE, page * NUM_PRODUCTS_PER_PAGE + NUM_PRODUCTS_PER_PAGE);
-  }, [products, page]);
 
   return (
     <Flex mt3>
-      {products.length && (
+      <Row>
+        <Col.C8>
+          <InputForm value={filterName} onChange={setFilterName} fs1 placeholder="filtro...">
+            Filtrar por nome
+          </InputForm>
+        </Col.C8>
+        <Col.C4>
+          <DropdownForm
+            value={filterCategory}
+            options={categories}
+            onDropdownChange={opt => setFilterCategory(opt?.value || '')}
+          >
+            Filtrar por categoria
+          </DropdownForm>
+        </Col.C4>
+      </Row>
+      {products?.length ? (
         <Table
           enablePagination
           numOfPages={numOfPages}
@@ -41,9 +72,14 @@ export const HomePage = () => {
             { key: 'image', label: 'Imagem', customCellRender: (p) => <img src={p.image} style={{ width: 100, margin: 'auto' }} /> },
             { key: 'description', label: 'Descrição' },
           ]}
-          dataSource={productsPerPage}
+          dataSource={products}
           onChangePage={(p) => setPage(p)}
+          onRowClick={(p) => console.log(p)}
         />
+      ) : (
+        <Flex.Center hFull wFull mt7>
+          <Title>Nenhum item encontrado</Title>
+        </Flex.Center>
       )}
     </Flex>
   );
