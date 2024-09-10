@@ -6,9 +6,7 @@ import { InputForm, Table } from "@molecules";
 import { DropdownForm } from "@organisms";
 import { useRouter } from "next/router";
 
-const NUM_PRODUCTS_PER_PAGE = 4;
-
-const NUM_PRODUCTS_TOTAL = 150;
+const NUM_PRODUCTS_PER_PAGE = 5;
 
 export const HomePage = () => {
   const router = useRouter()
@@ -24,9 +22,9 @@ export const HomePage = () => {
     initialize();
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     getAllProducts();
-  }, [page, filterCategory, filterName]);
+  }, [filterCategory, filterName])
 
   const initialize = async () => {
     const categories = await getCategories();
@@ -34,22 +32,32 @@ export const HomePage = () => {
     setCategories(categories);
   }
 
-  const getAllProducts = async () => { 
-    const products = await getProducts(page, NUM_PRODUCTS_PER_PAGE, filterCategory);
-    setProducts(products?.filter((p) => {
-      return !filterName || p.title?.toLowerCase().includes(filterName.toLowerCase())
-    }));
+  const getAllProducts = async () => {
+    const products = await getProducts(filterCategory, filterName);
+    setProducts(products);
   }
 
   const numOfPages = useMemo(() => {
-    return products?.length / NUM_PRODUCTS_PER_PAGE;
+    return products.length / NUM_PRODUCTS_PER_PAGE;
   }, [products]);
+
+  const productsOnPage = useMemo(() => {
+    return products.slice((page - 1) * NUM_PRODUCTS_PER_PAGE, page * NUM_PRODUCTS_PER_PAGE);
+  }, [products, page]);
 
   return (
     <Flex mt3>
       <Row>
         <Col.C8>
-          <InputForm value={filterName} onChange={setFilterName} fs1 placeholder="filtro...">
+          <InputForm
+            value={filterName}
+            onChange={e => {
+              setPage(1);
+              setFilterName(e);
+            }}
+            fs1
+            placeholder="filtro..."
+          >
             Filtrar por nome
           </InputForm>
         </Col.C8>
@@ -57,7 +65,10 @@ export const HomePage = () => {
           <DropdownForm
             value={filterCategory}
             options={categories}
-            onDropdownChange={opt => setFilterCategory(opt?.value || '')}
+            onDropdownChange={opt => {
+              setPage(1);
+              setFilterCategory(opt?.value || '')
+            }}
           >
             Filtrar por categoria
           </DropdownForm>
@@ -67,14 +78,14 @@ export const HomePage = () => {
         <Table
           enablePagination
           numOfPages={numOfPages}
-          page={0}
+          page={page}
           columns={[
             { key: 'title', label: 'Nome' },
             { key: 'price', label: 'Preço', currency: true },
             { key: 'image', label: 'Imagem', customCellRender: (p) => <img src={p.image} style={{ width: 100 }} /> },
             { key: 'description', label: 'Descrição' },
           ]}
-          dataSource={products}
+          dataSource={productsOnPage}
           onChangePage={(p) => setPage(p)}
           onRowClick={(p) => router.push(`/product/${p.id}`)}
         />
