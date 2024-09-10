@@ -1,57 +1,75 @@
-import { Product } from '@api';
-import { ModalFormMaintenance, TableMaintenance } from '@templates'
-import { GenericObject } from '@types';
-import { useState } from 'react';
-import { ProductForm } from './components/ProductForm/ProductForm';
-
-const dataSource = [
-  { id: 1, name: 'Caneta azul', price: 5.20, description: 'Caneta azul da marca FaberCastell' },
-  { id: 2, name: 'Borracha', price: 3.45, description: 'Borracha verde' },
-  { id: 3, name: 'Tesoura', price: 12.50, description: 'Tesoura sem ponta' }
-] as Array<Product>;
+import { ProductModel } from '@api';
+import { Button, Col, Flex, Row } from '@atoms';
+import { Form, InputForm } from '@molecules';
+import { useProductService } from '@services';
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react';
 
 export const ProductPage = () => { 
-  const [selectedProduct, setSelectedProduct] = useState<Product>();
-  const [products, setProducts] = useState<Array<Product>>(dataSource);
+  const [product, setProduct] = useState<ProductModel>();
+  const { getProduct } = useProductService();
+  const router = useRouter();
 
-  const columns = [
-    { key: 'name', label: 'Nome', },
-    { key: 'price', label: 'Preço', currency: true },
-    { key: 'description', label: 'Descrição', },
-  ] as GenericObject;
+  useEffect(() => {
+    initialize();
+  }, []);
+
+  const initialize = async () => {
+    const { id } = router.query;
+    const product = await getProduct(String(id));
+    setProduct(product);
+  }
 
   return (
-    <>
-      <ModalFormMaintenance
-        visible={!!selectedProduct}
-        onClose={() => setSelectedProduct(undefined)}
-      >
-        <ProductForm
-          initialData={selectedProduct}
-          onSave={(data) => { 
-            if (data.id) { 
-              setProducts(products.map(u => { 
-                if (u?.id === data.id) { 
-                  return data;
-                }
-                return u;
-              }))
-            } else {
-              data.id = products.length + 1;
-              setProducts([...products, data]);
-            }
-            setSelectedProduct(undefined);
-          }}
-        />
-      </ModalFormMaintenance>
-      <TableMaintenance<Product>
-        title="Produtos"
-        columns={columns}
-        dataSource={products}
-        onAdd={() => setSelectedProduct({})}
-        onEdit={(data) => setSelectedProduct(data)}
-        onConfirmDelete={item => setProducts(products.filter(u => u.id !== item?.id))}
-      />
-    </>
+    <Form>
+      <Row>
+        <Col.C1>
+          <InputForm disabled value={product?.id}>ID</InputForm>
+        </Col.C1>
+        <Col.C6>
+          <InputForm disabled value={product?.title}>Nome</InputForm>
+        </Col.C6>
+        <Col.C5>
+          <InputForm disabled value={product?.price} currency>Preço</InputForm>
+        </Col.C5>
+      </Row>
+      <Row>
+        <Col.C1>
+          <InputForm disabled value={product?.brand}>Marca</InputForm>
+        </Col.C1>
+        <Col.C6>
+          <InputForm disabled value={product?.model}>Modelo</InputForm>
+        </Col.C6>
+        <Col.C5>
+          <InputForm disabled value={product?.color}>Cor</InputForm>
+        </Col.C5>
+      </Row>
+      <Row>
+        <Col.C1>
+          <InputForm disabled value={product?.category}>Categoria</InputForm>
+        </Col.C1>
+        <Col.C6>
+          <InputForm disabled value={product?.popular ? 'Sim' : 'Não'}>Popular?</InputForm>
+        </Col.C6>
+        <Col.C5>
+          <InputForm disabled value={product?.discount} currency>Desconto</InputForm>
+        </Col.C5>
+      </Row>
+      <Row>
+        <Col.C12>
+          <InputForm disabled textarea value={product?.description}>Descrição</InputForm>
+        </Col.C12>
+      </Row>
+      <Row>
+        <Col.C12>
+          <Flex.Center wFull>
+            <img src={product?.image} width={300} />
+          </Flex.Center>
+        </Col.C12>
+      </Row>
+      <Flex alignEnd wFull>
+        <Button onClick={() => router.back()}>Voltar</Button>
+      </Flex>
+    </Form>
   );
 }
