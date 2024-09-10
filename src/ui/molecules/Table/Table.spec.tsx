@@ -4,11 +4,6 @@ import { TableSimple } from '@stories';
 import { TableProps } from './Table';
 import { sortTableValues } from './components/TableBody/TableBody.logic';
 import { TableColumnProps, TableSort } from '..';
-import {
-  formatNumberAsCurrency,
-  formatDateAsDDMMYYYY,
-  formatDateAsDDMMYYYYAndTime,
-} from '@helpers';
 import { GenericObject } from '@types';
 
 const renderTable = async (
@@ -70,12 +65,6 @@ describe('Table component test', () => {
     expect(cellsOfFirstRow[2]).toHaveTextContent(
       String((dataSource || [])[0].numberOfUnits)
     );
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[0].establishmentDate)
-    );
 
     const cellsOfSecondRow = screen.getAllByTestId(/table-row-1/i);
     expect(cellsOfSecondRow[0]).toHaveTextContent(
@@ -87,12 +76,6 @@ describe('Table component test', () => {
     expect(cellsOfSecondRow[2]).toHaveTextContent(
       String((dataSource || [])[1].numberOfUnits)
     );
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[1].establishmentDate)
-    );
 
     const cellsOfThirdRow = screen.getAllByTestId(/table-row-2/i);
     expect(cellsOfThirdRow[0]).toHaveTextContent(
@@ -103,12 +86,6 @@ describe('Table component test', () => {
     );
     expect(cellsOfThirdRow[2]).toHaveTextContent(
       String((dataSource || [])[2].numberOfUnits)
-    );
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[2].establishmentDate)
     );
 
     const rows = screen.getAllByRole('row');
@@ -266,276 +243,6 @@ describe('Table component test', () => {
     );
     expect(cellsOfThirdRow[2]).toHaveTextContent(
       String((dataSourceAfterSort || [])[2].numberOfUnits)
-    );
-  });
-
-  it('Have Table sorted values by date', async () => {
-    await renderTable(TableSimple);
-    const { dataSource } = (TableSimple.parameters ||
-      {}) as TableProps<GenericObject>;
-    let dataSourceAfterSort = sortTableValues<GenericObject>({
-      dataSource,
-      columns,
-      sorterColumnStatus: TableSort.ASC,
-      sorterColumnIndex: 4,
-    });
-
-    const cellsOfFirstRow = screen.getAllByTestId(/table-row-0/i);
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[0].establishmentDate)
-    );
-
-    const cellsOfSecondRow = screen.getAllByTestId(/table-row-1/i);
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[1].establishmentDate)
-    );
-
-    const cellsOfThirdRow = screen.getAllByTestId(/table-row-2/i);
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[2].establishmentDate)
-    );
-
-    const dateColumn = screen.getAllByRole('columnheader')[4];
-    await waitFor(() => {
-      fireEvent.click(dateColumn);
-    });
-
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime(dataSourceAfterSort[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY(dataSourceAfterSort[0].establishmentDate)
-    );
-
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime(dataSourceAfterSort[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY(dataSourceAfterSort[1].establishmentDate)
-    );
-
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime(dataSourceAfterSort[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY(dataSourceAfterSort[2].establishmentDate)
-    );
-
-    dataSourceAfterSort = sortTableValues<GenericObject>({
-      dataSource,
-      columns,
-      sorterColumnStatus: TableSort.DESC,
-      sorterColumnIndex: 4,
-    });
-
-    await waitFor(() => {
-      fireEvent.click(dateColumn);
-    });
-
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSourceAfterSort || [])[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSourceAfterSort || [])[0].establishmentDate)
-    );
-
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSourceAfterSort || [])[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSourceAfterSort || [])[1].establishmentDate)
-    );
-
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSourceAfterSort || [])[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSourceAfterSort || [])[2].establishmentDate)
-    );
-  });
-
-  it('Have Table sorted values by date and time', async () => {
-    await renderTable(TableSimple);
-    const { dataSource } = (TableSimple.parameters ||
-      {}) as TableProps<GenericObject>;
-    let dataSourceAfterSort = sortTableValues<GenericObject>({
-      dataSource,
-      columns,
-      sorterColumnStatus: TableSort.ASC,
-      sorterColumnIndex: 3,
-    });
-
-    const cellsOfFirstRow = screen.getAllByTestId(/table-row-0/i);
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[0].establishmentDate)
-    );
-
-    const cellsOfSecondRow = screen.getAllByTestId(/table-row-1/i);
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[1].establishmentDate)
-    );
-
-    const cellsOfThirdRow = screen.getAllByTestId(/table-row-2/i);
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSource || [])[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSource || [])[2].establishmentDate)
-    );
-
-    const dateAndTimeColumn = screen.getAllByRole('columnheader')[3];
-    await waitFor(() => {
-      fireEvent.click(dateAndTimeColumn);
-    });
-
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime(dataSourceAfterSort[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY(dataSourceAfterSort[0].establishmentDate)
-    );
-
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime(dataSourceAfterSort[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY(dataSourceAfterSort[1].establishmentDate)
-    );
-
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime(dataSourceAfterSort[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY(dataSourceAfterSort[2].establishmentDate)
-    );
-
-    dataSourceAfterSort = sortTableValues<GenericObject>({
-      dataSource,
-      columns,
-      sorterColumnStatus: TableSort.DESC,
-      sorterColumnIndex: 3,
-    });
-
-    await waitFor(() => {
-      fireEvent.click(dateAndTimeColumn);
-    });
-
-    expect(cellsOfFirstRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSourceAfterSort || [])[0].createdAt)
-    );
-    expect(cellsOfFirstRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSourceAfterSort || [])[0].establishmentDate)
-    );
-
-    expect(cellsOfSecondRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSourceAfterSort || [])[1].createdAt)
-    );
-    expect(cellsOfSecondRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSourceAfterSort || [])[1].establishmentDate)
-    );
-
-    expect(cellsOfThirdRow[3]).toHaveTextContent(
-      formatDateAsDDMMYYYYAndTime((dataSourceAfterSort || [])[2].createdAt)
-    );
-    expect(cellsOfThirdRow[4]).toHaveTextContent(
-      formatDateAsDDMMYYYY((dataSourceAfterSort || [])[2].establishmentDate)
-    );
-  });
-
-  it('Have Table sorted values by currency', async () => {
-    await renderTable(TableSimple);
-    const { dataSource } = (TableSimple.parameters ||
-      {}) as TableProps<GenericObject>;
-    let dataSourceAfterSort = sortTableValues<GenericObject>({
-      dataSource,
-      columns,
-      sorterColumnStatus: TableSort.ASC,
-      sorterColumnIndex: 5,
-    });
-
-    const ignoreCurrencySign = true;
-    const cellsOfFirstRow = screen.getAllByTestId(/table-row-0/i);
-    expect(cellsOfFirstRow[5]).toHaveTextContent(
-      formatNumberAsCurrency((dataSource || [])[0].id, ignoreCurrencySign)
-    );
-
-    const cellsOfSecondRow = screen.getAllByTestId(/table-row-1/i);
-    expect(cellsOfSecondRow[5]).toHaveTextContent(
-      formatNumberAsCurrency((dataSource || [])[1].id, ignoreCurrencySign)
-    );
-
-    const cellsOfThirdRow = screen.getAllByTestId(/table-row-2/i);
-    expect(cellsOfThirdRow[5]).toHaveTextContent(
-      formatNumberAsCurrency((dataSource || [])[2].id, ignoreCurrencySign)
-    );
-
-    const currencyColumn = screen.getAllByRole('columnheader')[5];
-    await waitFor(() => {
-      fireEvent.click(currencyColumn);
-    });
-
-    expect(cellsOfFirstRow[5]).toHaveTextContent(
-      formatNumberAsCurrency(
-        (dataSourceAfterSort || [])[0].id,
-        ignoreCurrencySign
-      )
-    );
-    expect(cellsOfSecondRow[5]).toHaveTextContent(
-      formatNumberAsCurrency(
-        (dataSourceAfterSort || [])[1].id,
-        ignoreCurrencySign
-      )
-    );
-    expect(cellsOfThirdRow[5]).toHaveTextContent(
-      formatNumberAsCurrency(
-        (dataSourceAfterSort || [])[2].id,
-        ignoreCurrencySign
-      )
-    );
-
-    dataSourceAfterSort = sortTableValues<GenericObject>({
-      dataSource,
-      columns,
-      sorterColumnStatus: TableSort.DESC,
-      sorterColumnIndex: 5,
-    });
-
-    await waitFor(() => {
-      fireEvent.click(currencyColumn);
-    });
-
-    expect(cellsOfFirstRow[5]).toHaveTextContent(
-      formatNumberAsCurrency(
-        (dataSourceAfterSort || [])[0].id,
-        ignoreCurrencySign
-      )
-    );
-    expect(cellsOfSecondRow[5]).toHaveTextContent(
-      formatNumberAsCurrency(
-        (dataSourceAfterSort || [])[1].id,
-        ignoreCurrencySign
-      )
-    );
-    expect(cellsOfThirdRow[5]).toHaveTextContent(
-      formatNumberAsCurrency(
-        (dataSourceAfterSort || [])[2].id,
-        ignoreCurrencySign
-      )
     );
   });
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Story, Meta } from '@storybook/react';
-import { withDesign } from 'storybook-addon-designs';
 import { Icon } from '@atoms';
 import { Dropdown, DropdownProps } from '@molecules';
 import { GenericObject } from '@types';
@@ -28,7 +27,6 @@ const Template: Story<GenericObject> = <T extends GenericObject>({
     <Dropdown<T> {...args} value={value} onChange={(v: T) => setValue(v)} />
   );
 };
-Template.decorators = [withDesign];
 
 export const DropdownSimple = Template.bind({});
 DropdownSimple.args = {

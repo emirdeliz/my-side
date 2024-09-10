@@ -1,5 +1,5 @@
 import {
-  formatNumberAsCurrency,
+  maskMoney,
 } from '@helpers';
 import { GenericObject } from '@types';
 import {
@@ -99,7 +99,7 @@ const formatValueMaybe = <T>(
   const { currency } = column;
   switch (true) {
     case currency:
-      return formatNumberAsCurrency(Number(value));
+      return maskMoney(Number(value));
   }
   return `${value}`;
 };
