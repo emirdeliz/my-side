@@ -33,8 +33,7 @@ const inputBase = css`
   ${buildPadding()}
 `;
 
-export const Input = styled.input.attrs(({ password }: InputProps) => ({
-  type: password ? 'password' : 'text',
+export const Input = styled.input.attrs(() => ({
   autoComplete: 'off',
   role: 'textbox',
 }))<InputProps>`

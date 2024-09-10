@@ -38,15 +38,9 @@ DropdownFormSimple.args = {
   keyOfLabel: 'label',
 };
 
-export const DropdownFormSemibold = Template.bind({});
-DropdownFormSemibold.args = {
-  ...DropdownFormSimple.args,
-  fw3: true,
-};
-
 export const DropdownFormRequired = Template.bind({});
 DropdownFormRequired.args = {
-  ...DropdownFormSemibold.args,
+  ...DropdownFormSimple.args,
   errorMsg: 'Categoria inválida',
   required: true,
 };
