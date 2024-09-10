@@ -48,7 +48,7 @@ export const DropdownForm = <T extends GenericObject>({
 
   const id = children ? children.replace(/\s/g, '_') : String(props.id);
   return (
-    <FormGroup label={children} target={id} fw3={fw3} {...props}>
+    <FormGroup label={children} target={id} fw3 {...props}>
       <Dropdown
         {...props}
         id={id}
