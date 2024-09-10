@@ -49,7 +49,7 @@ export const HomePage = () => {
   return (
     <Flex mt3>
       <Row>
-        <Col.C8>
+        <Col.C8 tablet="12">
           <InputForm
             value={filterName}
             onChange={e => {
@@ -62,7 +62,7 @@ export const HomePage = () => {
             Filtrar por nome
           </InputForm>
         </Col.C8>
-        <Col.C4>
+        <Col.C4 tablet="12">
           <DropdownForm
             value={filterCategory}
             options={categories}
@@ -81,14 +81,14 @@ export const HomePage = () => {
           numOfPages={numOfPages}
           page={page}
           columns={[
-            { key: 'title', label: 'Nome' },
+            { key: 'title', label: 'Nome', minWidth: 200 },
             { key: 'price', label: 'Preço', currency: true },
             {
               key: 'image', label: 'Imagem', customCellRender: (p) => (
-                <Image alt={p.title || ''} src={p.image || ''} style={{ width: 100 }} />
+                <Image alt={p.title || ''} unoptimized src={p.image || ''} width={100} height={100}/>
               )
             },
-            { key: 'description', label: 'Descrição' },
+            { key: 'description', label: 'Descrição', minWidth: 300 },
           ]}
           dataSource={productsOnPage}
           onChangePage={(p) => setPage(p)}
