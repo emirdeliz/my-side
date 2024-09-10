@@ -17,6 +17,7 @@ interface PatchRequestParams<BodyDataType> extends PostRequestParams<BodyDataTyp
 
 interface ApiResponse<T> {
   products?: T;
+  categories?: T;
 }
 
 export interface ApiHeadersCustom {
@@ -57,7 +58,7 @@ export const Api = <T>(headersCustom?: ApiHeadersCustom) => {
         buildUrlQueryParams(url, queryParams)
       );
 
-      return (data as ApiResponse<T>).products;
+      return (data as ApiResponse<T>);
     } catch (e) {
       console.log('Error', `${e} => ${url}`);
     }
@@ -69,7 +70,7 @@ export const Api = <T>(headersCustom?: ApiHeadersCustom) => {
       const { data } = await instance.get<T, AxiosResponse<Array<T>>>(
         buildUrlQueryParams(url, queryParams)
       );
-      return (data as ApiResponse<T>).products as Array<T>;
+      return (data as ApiResponse<T>);
     } catch (e) {
       console.log('Error', `${e} => ${url}`);
     }
@@ -86,7 +87,7 @@ export const Api = <T>(headersCustom?: ApiHeadersCustom) => {
         body
       );
       const result = (data as ApiResponse<T>);
-      return result.products || result;
+      return result;
     } catch (e) {
       console.log('Error', `${e} => ${url}`);
     }
@@ -102,7 +103,7 @@ export const Api = <T>(headersCustom?: ApiHeadersCustom) => {
         buildUrlQueryParams(url, queryParams),
         body as AxiosRequestConfig
       );
-      return (data as ApiResponse<T>).products;
+      return (data as ApiResponse<T>);
     } catch (e) {
       console.log('Error', `${e} => ${url}`);
     }
@@ -118,7 +119,7 @@ export const Api = <T>(headersCustom?: ApiHeadersCustom) => {
         buildUrlQueryParams(url, queryParams),
         body
       );
-      return (data.data as ApiResponse<T>)?.products;
+      return (data.data as ApiResponse<T>);
     } catch (e) {
       console.log('Error', `${e} => ${url}`);
     }
@@ -134,7 +135,7 @@ export const Api = <T>(headersCustom?: ApiHeadersCustom) => {
         buildUrlQueryParams(url, queryParams),
         body
       );
-      return (data.data as ApiResponse<T>).products;
+      return (data.data as ApiResponse<T>);
     } catch (e) {
       console.log('Error', `${e} => ${url}`);
     }
