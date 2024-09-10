@@ -2,23 +2,24 @@ import { ProductModel } from '@api';
 import { Button, Col, Flex, Row } from '@atoms';
 import { Form, InputForm } from '@molecules';
 import { useProductService } from '@services';
+import Image from 'next/image';
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const ProductPage = () => { 
   const [product, setProduct] = useState<ProductModel>();
   const { getProduct } = useProductService();
   const router = useRouter();
 
-  useEffect(() => {
-    initialize();
-  }, []);
-
-  const initialize = async () => {
+  const initialize = useCallback(async () => {
     const { id } = router.query;
     const product = await getProduct(String(id));
     setProduct(product);
-  }
+  }, [getProduct, router.query]);
+
+  useEffect(() => {
+    initialize();
+  }, [initialize]);
 
   return (
     <Form>
@@ -63,7 +64,7 @@ export const ProductPage = () => {
       <Row>
         <Col.C12>
           <Flex.Center wFull>
-            <img src={product?.image} width={300} />
+            <Image src={product?.image || ''} alt={product?.title || ''} width={300} />
           </Flex.Center>
         </Col.C12>
       </Row>

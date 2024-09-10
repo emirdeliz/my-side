@@ -6,7 +6,6 @@ export interface DropdownFormProps<T>
   extends Exclude<DropdownProps<T>, 'onChange'> {
   children?: string;
   errorMsg?: string;
-  fw3?: boolean;
   required?: boolean;
   onBlur?: () => void;
   onDropdownChange?: (
@@ -29,7 +28,6 @@ const validateInput = <T extends GenericObject>({
 export const DropdownForm = <T extends GenericObject>({
   children,
   value,
-  fw3,
   onDropdownChange,
   onBlur,
   ...props

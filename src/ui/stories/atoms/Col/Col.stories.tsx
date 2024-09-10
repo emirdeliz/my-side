@@ -1,16 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Col, ColProps, ColSize, Row } from '@atoms';
+import { Col, ColProps, ColSize } from '@atoms';
 import styled from 'styled-components';
 
 export default {
   title: 'Components/Atoms/Col',
   component: Col,
 } as Meta;
-
-const Container = styled.div`
-  width: 500px;
-`;
 
 const Content = styled.div`
   background-color: ${({ theme }) => theme.colors.N2};

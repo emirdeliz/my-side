@@ -43,7 +43,7 @@ export const Button = styled.button<ButtonProps>`
       return;
     }
 
-    const { bg, text, border } = getThemeColorByOptions({
+    const { bg, text } = getThemeColorByOptions({
       info,
       success,
       warn,

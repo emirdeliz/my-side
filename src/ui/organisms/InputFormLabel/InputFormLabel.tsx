@@ -5,7 +5,6 @@ import * as S from './InputFormLabel.style';
 
 export interface InputFormLabelProps extends InputProps {
   children?: string;
-  errorMsg?: string;
   id?: string;
   labelInfo?: string;
   fw3?: boolean;
@@ -17,7 +16,6 @@ export const InputFormLabel = ({
   id,
   labelInfo,
   fw3,
-  errorMsg,
   row,
   ...props
 }: InputFormLabelProps) => {

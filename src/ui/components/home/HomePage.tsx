@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ProductModel } from "@api";
 import { Col, Flex, Row, Title } from "@atoms"
 import { useCategoryService, useProductService } from "@services";
 import { InputForm, Table } from "@molecules";
 import { DropdownForm } from "@organisms";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const NUM_PRODUCTS_PER_PAGE = 5;
 
@@ -18,24 +19,24 @@ export const HomePage = () => {
   const [filterName, setFilterName] = useState<string>('');
   const [filterCategory, setFilterCategory] = useState<string>('');
 
-  useEffect(() => {
-    initialize();
-  }, []);
-
-  useEffect(() => { 
-    getAllProducts();
-  }, [filterCategory, filterName])
-
-  const initialize = async () => {
+  const initialize = useCallback(async () => {
     const categories = await getCategories();
     categories.unshift('todos');
     setCategories(categories);
-  }
+  }, [getCategories]);
 
-  const getAllProducts = async () => {
+  const getAllProducts = useCallback(async (filterCategory?: string, filterName?: string) => {
     const products = await getProducts(filterCategory, filterName);
     setProducts(products);
-  }
+  }, [getProducts]);
+
+  useEffect(() => {
+    initialize();
+  }, [initialize]);
+
+  useEffect(() => { 
+    getAllProducts(filterCategory, filterName);
+  }, [filterCategory, filterName, getAllProducts])
 
   const numOfPages = useMemo(() => {
     return products.length / NUM_PRODUCTS_PER_PAGE;
@@ -82,7 +83,11 @@ export const HomePage = () => {
           columns={[
             { key: 'title', label: 'Nome' },
             { key: 'price', label: 'Preço', currency: true },
-            { key: 'image', label: 'Imagem', customCellRender: (p) => <img src={p.image} style={{ width: 100 }} /> },
+            {
+              key: 'image', label: 'Imagem', customCellRender: (p) => (
+                <Image alt={p.title || ''} src={p.image || ''} style={{ width: 100 }} />
+              )
+            },
             { key: 'description', label: 'Descrição' },
           ]}
           dataSource={productsOnPage}

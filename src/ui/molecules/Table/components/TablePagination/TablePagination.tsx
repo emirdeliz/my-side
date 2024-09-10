@@ -4,7 +4,7 @@ import {
   PaginationItemsContainer,
 } from './TablePagination.style';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Title } from '@atoms';
 
 type PageProps = {
@@ -29,21 +29,7 @@ export const TablePagination = ({
   const [pages, setPages] = useState<PageProps[]>([]);
   const numOfPagesBase = numOfPages > 1 ? numOfPages : 1;
 
-  useEffect(() => {
-    formatInitialPages();
-    setCurrentIndex((page || 0) > 1 ? page : 1);
-  }, [currentIndex, numOfPagesBase]);
-
-  const isInTheFirstFiveCharacters = (pageIndex: number): boolean => {
-    return pageIndex < 5;
-  };
-
-  const isInTheLastFiveCharacters = (pageIndex: number): boolean => {
-    const startLastFiveIndexes = numOfPagesBase - 5;
-    return pageIndex > startLastFiveIndexes;
-  };
-
-  const mapStructurePages = (): PageProps[] => {
+  const mapStructurePages = useCallback((): PageProps[] => {
     const pages = [];
     for (let index = 1; index <= numOfPagesBase; index++) {
       pages.push({
@@ -53,6 +39,35 @@ export const TablePagination = ({
       });
     }
     return pages;
+  }, [numOfPagesBase]);
+
+  const isInTheLastFiveCharacters = useCallback((pageIndex: number): boolean => {
+    const startLastFiveIndexes = numOfPagesBase - 5;
+    return pageIndex > startLastFiveIndexes;
+  }, [numOfPagesBase]);
+
+  const formatInitialPages = useCallback(() => {
+    const pagesStructured = mapStructurePages();
+    if (numOfPagesBase > MAGIC_MINIMAL_INDEXES && currentIndex) {
+      if (isInTheFirstFiveCharacters(currentIndex)) {
+        setPages(mountFirstFivePagesMode(pagesStructured));
+      } else if (isInTheLastFiveCharacters(currentIndex)) {
+        setPages(mountLastFivePagesMode(pagesStructured));
+      } else {
+        setPages(mountMiddleOfThePagesMode(currentIndex, pagesStructured));
+      }
+    } else {
+      setPages(pagesStructured);
+    }
+  }, [numOfPagesBase, currentIndex, isInTheLastFiveCharacters, mapStructurePages]);
+
+  useEffect(() => {
+    formatInitialPages();
+    setCurrentIndex((page || 0) > 1 ? page : 1);
+  }, [currentIndex, numOfPagesBase, page, formatInitialPages]);
+
+  const isInTheFirstFiveCharacters = (pageIndex: number): boolean => {
+    return pageIndex < 5;
   };
 
   const mountFirstFivePagesMode = (pages: PageProps[]): PageProps[] => {
@@ -117,21 +132,6 @@ export const TablePagination = ({
     });
     pagesToShow.push({ ...lastPage, isSelected: true });
     return pagesToShow;
-  };
-
-  const formatInitialPages = () => {
-    const pagesStructured = mapStructurePages();
-    if (numOfPagesBase > MAGIC_MINIMAL_INDEXES && currentIndex) {
-      if (isInTheFirstFiveCharacters(currentIndex)) {
-        setPages(mountFirstFivePagesMode(pagesStructured));
-      } else if (isInTheLastFiveCharacters(currentIndex)) {
-        setPages(mountLastFivePagesMode(pagesStructured));
-      } else {
-        setPages(mountMiddleOfThePagesMode(currentIndex, pagesStructured));
-      }
-    } else {
-      setPages(pagesStructured);
-    }
   };
 
   const selectPage = ({ index }: PageProps) => {

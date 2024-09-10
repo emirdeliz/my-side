@@ -10,7 +10,6 @@ export * from './ModalTemplate/ModalTemplate';
 export * from './StepProgressBar/StepProgressBar';
 export * from './Switch/Switch';
 export * from './Toast/Toast';
-export * from './Tooltip/Tooltip';
 export * from './YearSelect/YearSelect';
 export * from './Table/Table';
 export * from './Alert/Alert';

@@ -5,9 +5,10 @@ import * as S from "./Layout.style";
 
 interface LayoutProps {
   children: ReactNode;
+  onChangeTheme: () => void;
 }
 
-export const Layout = memo(({ children }: LayoutProps) => {
+export const Layout = memo(({ children, onChangeTheme }: LayoutProps) => {
   return (
     <S.Layout>
       <S.Header>
@@ -15,7 +16,7 @@ export const Layout = memo(({ children }: LayoutProps) => {
       </S.Header>
       <S.LayoutContent>
         <S.Content>
-          <DropdownTheme onChange={() => { }} />
+          <DropdownTheme onChange={onChangeTheme} />
           {children}
         </S.Content>
       </S.LayoutContent>

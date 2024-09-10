@@ -20,7 +20,6 @@ export const RadioForm = ({
   options,
   directionRow,
   onChange,
-  ...props
 }: RadioFormProps) => {
   const radioOptions = useMemo(() => {
     return options?.map(({ value: optValue, label, clickable }, index) => {

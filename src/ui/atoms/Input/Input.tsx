@@ -66,8 +66,6 @@ export const applyMaskMaybe = (
 };
 export const Input = ({
   currency,
-  textarea,
-  maxLength,
   after,
   before,
   value,
@@ -75,7 +73,6 @@ export const Input = ({
   transparent,
   dataTestId,
   onChange,
-  onKeyDown,
   ...props
 }: InputProps) => {
   const id = String(props.id);

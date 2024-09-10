@@ -13,7 +13,6 @@ export const Title = styled.span<TitleProps>`
     capitalize,
     uppercase,
     semibold,
-    ellipsis,
     cursorPointer,
     noWrap,
     theme,

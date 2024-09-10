@@ -5,7 +5,6 @@ import * as S from './SwitchForm.style';
 
 export interface SwitchFormProps extends SwitchProps {
   children?: string;
-  errorMsg?: string;
   id?: string;
   fw3?: boolean;
   row?: boolean;
@@ -15,7 +14,6 @@ export const SwitchForm = ({
   children,
   id,
   fw3,
-  errorMsg,
   row,
   ...props
 }: SwitchFormProps) => {

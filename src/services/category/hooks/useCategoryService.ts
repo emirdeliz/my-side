@@ -1,4 +1,4 @@
-import { getCategoriesApi, ProductModel } from '@api';
+import { getCategoriesApi } from '@api';
 import { useService } from '../../hooks/useService';
 
 export const useCategoryService = () => {

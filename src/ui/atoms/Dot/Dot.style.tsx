@@ -1,5 +1,5 @@
 import { getThemeColor } from '@theme';
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 import { DotProps } from './Dot';
 
 export const DotXss = '3px';
@@ -14,8 +14,7 @@ const getSize = ({
   xss,
   xs,
   sm,
-  theme,
-}: DotProps & { theme: DefaultTheme }) => {
+}: DotProps) => {
   switch (true) {
     case xss:
       return [DotXss, DotXss];

@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <LoadingProvider>
-          <Layout>
+          <Layout onChangeTheme={() => setIsDarkMode(!isDarkMode)}>
             <GlobalStyle />
             <Component {...pageProps} />
           </Layout>

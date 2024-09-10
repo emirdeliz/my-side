@@ -17,7 +17,7 @@ const yearsEnabled = (startDate: Date, finishDate?: Date) => {
     ? finishDate.getFullYear()
     : new Date().getFullYear();
 
-  let result = [];
+  const result = [];
 
   if (startYear >= endYear) {
     return [endYear];

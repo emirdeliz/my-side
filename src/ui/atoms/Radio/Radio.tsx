@@ -15,7 +15,6 @@ export const Radio = ({
   dataTestId = 'input-atom-radio',
   clickable = true,
   checked,
-  children,
   onChange,
   ...props
 }: RadioProps) => {
