@@ -5,7 +5,7 @@ import { FormGroup } from '../FormGroup/FormGroup';
 export interface InputFormProps extends Omit<InputProps, 'onChange'> {
   children: string;
   value?: string | number;
-  onChange?: (value: string | number) => void;
+  onChange?: (value: string) => void;
 }
 
 export const InputForm = ({
