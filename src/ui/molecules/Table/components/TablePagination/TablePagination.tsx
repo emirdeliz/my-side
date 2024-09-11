@@ -24,7 +24,7 @@ export const TablePagination = ({
   numOfPages,
   onChangePage,
 }: TablePaginationProps) => {
-  const MAGIC_MINIMAL_INDEXES = 7;
+  const NUM_ITEMS_PAGINATION = 10;
   const [currentIndex, setCurrentIndex] = useState<number | undefined>((page || 0) > 1 ? page : 1);
   const [pages, setPages] = useState<PageProps[]>([]);
   const numOfPagesBase = numOfPages > 1 ? numOfPages : 1;
@@ -48,7 +48,7 @@ export const TablePagination = ({
 
   const formatInitialPages = useCallback(() => {
     const pagesStructured = mapStructurePages();
-    if (numOfPagesBase > MAGIC_MINIMAL_INDEXES && currentIndex) {
+    if (numOfPagesBase > NUM_ITEMS_PAGINATION && currentIndex) {
       if (isInTheFirstFiveCharacters(currentIndex)) {
         setPages(mountFirstFivePagesMode(pagesStructured));
       } else if (isInTheLastFiveCharacters(currentIndex)) {
