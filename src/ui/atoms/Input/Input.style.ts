@@ -6,7 +6,7 @@ const inputBase = css`
   width: 100%;
   height: 100%;
   border: solid 1px ${({ theme }) => theme.colors.N3};
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.colors.N5};
   color: ${({ theme }) => theme.colors.P1};
   outline-color: ${({ theme }) => theme.colors.P2};
   border-radius: ${({ theme }) => theme.radius.Sm};

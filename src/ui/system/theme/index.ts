@@ -1,5 +1,5 @@
 import { DefaultTheme } from 'styled-components';
-import { AppThemeColorDark } from './colors';
+import { Colors } from './colors';
 import { Display } from './display';
 import { FontSize } from './font-size';
 import { FontWeight } from './font-weight';
@@ -12,7 +12,7 @@ import { Shadow } from './shadow';
 import { ZIndex } from './z-index';
 
 export const AppTheme = {
-  colors: AppThemeColorDark,
+  colors: Colors,
   fontSize: FontSize,
   fontWeight: FontWeight,
   radius: Radius,

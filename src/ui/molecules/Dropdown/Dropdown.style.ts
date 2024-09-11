@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { centerVerticalAbsolute, fullHorizontalAbsolute } from '@theme';
 
-const DROPDOWN_HEIGHT = '32px';
+const DROPDOWN_HEIGHT = '27px';
 const DROPDOWN_MIN_WIDTH = '150px';
 
 export const Container = styled.div`
@@ -15,6 +15,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.N5};
   padding: ${({ theme }) => `${theme.padding.Xs} ${theme.padding.Sm}`};
   padding-right: ${({ theme }) => theme.padding.Nm};
+  border: solid 1px ${({ theme }) => theme.colors.N3};
 `;
 
 export const IconArrow = styled.div`
@@ -46,7 +47,7 @@ export const Menu = styled.div<MenuProps>`
   z-index: ${({ theme }) => theme.zIndex.Lg};
   border-radius: ${({ theme }) => theme.radius.Xs};
   box-shadow: ${({ theme }) => theme.shadow.Sm};
-  background-color: ${({ theme }) => theme.colors.White};
+  background-color: ${({ theme }) => theme.colors.N5};
   padding: ${({ theme }) => theme.padding.Sm};
   ${({ menuTop }) =>
     menuTop
@@ -76,10 +77,7 @@ export const MenuItem = styled.a`
   font-size: ${({ theme }) => theme.fontSize.Xs};
   padding: ${({ theme }) => `${theme.padding.Sm} ${theme.padding.Sm}`};
   border-radius: ${({ theme }) => theme.radius.Xs};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.N4};
-  }
+  color: ${({ theme }) => theme.colors.N3};
 `;
 
 export const ReadOnly = styled.div`

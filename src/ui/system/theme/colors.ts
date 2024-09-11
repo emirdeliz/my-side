@@ -33,6 +33,8 @@ export const AppThemeColorLight = {
 
 export const AppThemeColorDark = {
   ...Colors,
+  N6: '#181C14',
+  N5: '#181C14',
 };
 
 export interface ColorsProps {
