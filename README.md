@@ -11,3 +11,5 @@ This is a simple project that lists products and sees the details of each produc
 How to run:
 - Install the dependencies running: ```yarn install```
 - Run the script to execute the app running: ```yarn dev```
+
+Demo: https://my-side-snowy.vercel.app/
