@@ -77,7 +77,7 @@ export const HomePage = () => {
         </Col.C4>
       </Row>
       {products?.length ? (
-        <Table
+        <Table<ProductModel>
           enablePagination
           numOfPages={numOfPages}
           page={page}
