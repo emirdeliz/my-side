@@ -61,10 +61,6 @@ export const Dropdown = <T extends GenericObject>({
     );
   }, [filter, optionsNormalized]);
 
-  const hasSelectedItem = useMemo(
-    () => !!selectedItem.label,
-    [selectedItem.label],
-  );
   const id = String(props.id);
 
   if (readOnly) {
