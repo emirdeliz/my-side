@@ -18,6 +18,7 @@ export const HomePage = () => {
   const [categories, setCategories] = useState<Array<string>>([]);
   const [filterName, setFilterName] = useState<string>('');
   const [filterCategory, setFilterCategory] = useState<string>('');
+  const [processing, setProcessing] = useState<boolean>(false);
 
   const initialize = useCallback(async () => {
     const categories = await getCategories();
@@ -26,8 +27,10 @@ export const HomePage = () => {
   }, [getCategories]);
 
   const getAllProducts = useCallback(async (filterCategory?: string, filterName?: string) => {
+    setProcessing(true);
     const products = await getProducts(filterCategory, filterName);
     setProducts(products);
+    setProcessing(false);
   }, [getProducts]);
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export const HomePage = () => {
 
   return (
     <Flex mt3>
-      <Row>
+      <Row mb2>
         <Col.C8 tablet="12">
           <InputForm
             dataTestId="input-search"
@@ -95,7 +98,7 @@ export const HomePage = () => {
           onChangePage={(p) => setPage(p)}
           onRowClick={(p) => router.push(`/product/${p.id}`)}
         />
-      ) : (
+      ) : processing ? null : (
         <Flex.Center hFull wFull mt7>
           <Title n3>Nenhum item encontrado</Title>
         </Flex.Center>
