@@ -8,12 +8,12 @@ export const useProductService = () => {
   const getProducts = useCallback(async (filterCategory?: string, filterName?: string) => {
     const response = await callApi<Array<ProductModel>>(getProductsApi, filterCategory, filterName);
     return response;
-  }, []);
+  }, [callApi]);
 
   const getProduct = useCallback(async (id: string) => {
     const response = await callApi<ProductModel>(getProductApi, id);
     return response;
-  }, []);
+  }, [callApi]);
 
   return {
     getProduct,

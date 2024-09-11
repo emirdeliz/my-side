@@ -8,7 +8,7 @@ export const useCategoryService = () => {
   const getCategories = useCallback(async () => {
     const response = await callApi<Array<string>>(getCategoriesApi);
     return response;
-  }, []);
+  }, [callApi]);
 
   return {
     getCategories,

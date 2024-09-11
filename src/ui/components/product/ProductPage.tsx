@@ -18,7 +18,7 @@ export const ProductPage = () => {
     }
     const product = await getProduct(String(id));
     setProduct(product);
-  }, [getProduct, router.query.id]);
+  }, [getProduct, router.query]);
 
   useEffect(() => {
     initialize();
