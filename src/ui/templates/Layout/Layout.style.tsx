@@ -17,11 +17,11 @@ export const Layout = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: ${({ theme }) => theme.colors.N6};
 `;
 
 export const LayoutContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  position: relative;
 `;

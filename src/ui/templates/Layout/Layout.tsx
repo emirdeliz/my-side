@@ -1,6 +1,6 @@
 import { ReactNode, memo } from "react";
 import Image from "next/image";
-import { DropdownTheme } from "../DropdownTheme/DropdownTheme";
+import { ButtonTheme } from "../ButtonTheme/ButtonTheme";
 import * as S from "./Layout.style";
 
 interface LayoutProps {
@@ -16,7 +16,7 @@ export const Layout = memo(({ children, onChangeTheme }: LayoutProps) => {
       </S.Header>
       <S.LayoutContent>
         <S.Content>
-          <DropdownTheme onChange={onChangeTheme} />
+          <ButtonTheme onChange={onChangeTheme} />
           {children}
         </S.Content>
       </S.LayoutContent>
