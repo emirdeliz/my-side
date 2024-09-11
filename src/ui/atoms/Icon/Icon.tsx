@@ -32,6 +32,8 @@ export interface IconOptions {
   upOpen?: boolean;
   user?: boolean;
   users?: boolean;
+  sun?: boolean;
+  moon?: boolean;
 }
 
 export interface IconProps extends IconOptions, ColorsProps {
@@ -81,7 +83,9 @@ const getIcon = ({
   transactions,
   user,
   users,
-  trashEmpty
+  trashEmpty,
+  sun,
+  moon
 }: IconProps) => {
   switch (true) {
     case alert:
@@ -146,6 +150,10 @@ const getIcon = ({
       return 'up-open';
     case user:
       return 'user';
+    case sun:
+      return 'sun';
+    case moon:
+      return 'moon';
     case users:
       return 'users';
   }
@@ -189,3 +197,5 @@ Icon.Transactions = (props: IconProps) => <Icon {...props} transactions />;
 Icon.TrashEmpty = (props: IconProps) => <Icon {...props} trashEmpty />;
 Icon.User = (props: IconProps) => <Icon {...props} user />;
 Icon.Users = (props: IconProps) => <Icon {...props} users />;
+Icon.Sun = (props: IconProps) => <Icon {...props} sun />;
+Icon.Moon = (props: IconProps) => <Icon {...props} moon />;
