@@ -12,7 +12,6 @@ import {
   Shadow,
   ZIndex,
 } from '@theme';
-import { Loading } from '@atoms';
 import GlobalStyle from '../src/pages/global.style.ts';
 import '../src/assets/fontello/css/fontello.css';
 import '../src/pages/_app.css';
