@@ -71,7 +71,7 @@ export const ProductPage = () => {
           </Flex.Center>
         </Col.C12>
       </Row>
-      <Flex alignEnd wFull>
+      <Flex alignEnd wFull mt3>
         <Button onClick={() => router.back()}>Voltar</Button>
       </Flex>
     </Form>
