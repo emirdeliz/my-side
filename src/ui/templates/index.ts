@@ -1,3 +1,3 @@
 export * from './Logo/Logo';
 export * from './Layout/Layout';
-export * from './DropdownTheme/DropdownTheme';
+export * from './ButtonTheme/ButtonTheme';
