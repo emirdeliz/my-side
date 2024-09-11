@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
-import { LoadingProvider } from '@atoms';
 import { AppTheme, AppThemeColorDark, AppThemeColorLight } from '@theme';
 import { Layout } from '@templates';
 import GlobalStyle from './global.style';
@@ -22,12 +21,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Reset />
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <LoadingProvider>
-          <Layout onChangeTheme={() => setIsDarkMode(!isDarkMode)}>
-            <GlobalStyle />
-            <Component {...pageProps} />
-          </Layout>
-        </LoadingProvider>
+        <Layout onChangeTheme={() => setIsDarkMode(!isDarkMode)}>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
       </main>
   );

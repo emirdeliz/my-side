@@ -12,7 +12,7 @@ import {
   Shadow,
   ZIndex,
 } from '@theme';
-import { Loading, LoadingProvider } from '@atoms';
+import { Loading } from '@atoms';
 import GlobalStyle from '../src/pages/global.style.ts';
 import '../src/assets/fontello/css/fontello.css';
 import '../src/pages/_app.css';
@@ -45,11 +45,8 @@ export const decorators = [
         zIndex: ZIndex,
       }}
     >
-      <LoadingProvider>
-        <Story />
-        <GlobalStyle />
-        <Loading.Global />
-      </LoadingProvider>
+      <Story />
+      <GlobalStyle />
     </ThemeProvider>
   ),
 ];

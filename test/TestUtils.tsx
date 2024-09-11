@@ -1,7 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { render } from '@testing-library/react';
-import { LoadingProvider } from '@atoms';
 import { theme } from '@theme';
 import 'jest-styled-components';
 
@@ -12,7 +11,7 @@ interface ThemeTestUtilsProps {
 export const ThemeTestUtils = ({ children }: ThemeTestUtilsProps) => {
   return (
     <ThemeProvider theme={theme}>
-      <LoadingProvider>{children}</LoadingProvider>
+      {children}
     </ThemeProvider>
   );
 };

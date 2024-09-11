@@ -9,7 +9,6 @@ export * from './Image/Image';
 export * from './Input/Input';
 export * from './Label/Label';
 export * from './Link/Link';
-export * from './Loading/Loading';
 export * from './Overlay/Overlay';
 export * from './Radio/Radio';
 export * from './Row/Row';
