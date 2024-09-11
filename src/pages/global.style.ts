@@ -1,7 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-const BODY_MIN_WIDTH = '300px';
-
 const Global = createGlobalStyle`
   html, body, body > div, main {
     margin: 0;
@@ -9,8 +7,8 @@ const Global = createGlobalStyle`
 		width: 100%;
   }
 
-  body {
-    min-width: ${BODY_MIN_WIDTH};
+  html, body, #__next, main {
+    height: 100%;
   }
 
   b {
