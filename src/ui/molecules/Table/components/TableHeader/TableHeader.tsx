@@ -54,7 +54,7 @@ export const TableHeader = <T extends GenericObject>({
           onClick={() => sortData(index)}
         >
           <Flex.Row wFull alignCenter>
-            <Title fs1 semibold>{label}</Title>
+            <Title fs1 semibold n2>{label}</Title>
             {sortable && label && (
               <Icon
                 sm

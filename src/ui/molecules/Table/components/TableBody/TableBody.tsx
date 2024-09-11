@@ -50,7 +50,7 @@ export const TableBody = <T extends GenericObject>({
             {customCellRender ? (
               customCellRender(row)
             ) : (
-              <Title fs1>{String(valueFormatted || row[keyLabel] || '')}</Title>
+              <Title fs1 n2>{String(valueFormatted || row[keyLabel] || '')}</Title>
             )}
           </S.BodyColumn>
         );

@@ -7,7 +7,7 @@ const inputBase = css`
   height: 100%;
   border: solid 1px ${({ theme }) => theme.colors.N3};
   background-color: ${({ theme }) => theme.colors.N5};
-  color: ${({ theme }) => theme.colors.P1};
+  color: ${({ theme }) => theme.colors.N3};
   outline-color: ${({ theme }) => theme.colors.P2};
   border-radius: ${({ theme }) => theme.radius.Sm};
   padding: ${({ theme }) => `${theme.padding.Sm} ${theme.padding.Sm}`};

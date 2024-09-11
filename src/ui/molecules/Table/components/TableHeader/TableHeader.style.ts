@@ -10,8 +10,9 @@ export const HeadColumn = styled.th`
   top: 0;
   cursor: pointer;
   white-space: nowrap;
-  background-color: ${({ theme }) => theme.colors.White};
+  background-color: ${({ theme }) => theme.colors.N6};
   padding: ${({ theme }) => `${theme.padding.Sm} ${theme.padding.Nm}`};
   box-shadow: ${({ theme }) => `${theme.shadow.Sm}`};
   z-index: ${({ theme }) => `${theme.zIndex.Xs}`};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.N3};
 `;

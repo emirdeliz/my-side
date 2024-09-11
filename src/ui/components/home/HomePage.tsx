@@ -97,7 +97,7 @@ export const HomePage = () => {
         />
       ) : (
         <Flex.Center hFull wFull mt7>
-          <Title>Nenhum item encontrado</Title>
+          <Title n3>Nenhum item encontrado</Title>
         </Flex.Center>
       )}
     </Flex>

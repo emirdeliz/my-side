@@ -34,6 +34,8 @@ export const PaginationItem = styled.div<IPaginationItem>`
   margin-left: ${({ theme }) => theme.margin.Sm};
   margin-right: ${({ theme }) => theme.margin.Sm};
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.N3};
+  font-weight: ${({ theme }) => theme.fontWeight.Semibold};
   ${({ selected, theme }) =>
     selected && `background-color: ${theme.colors.N4};`}
   ${({ isActive, theme }) => isActive && `color: ${theme.colors.White};`}

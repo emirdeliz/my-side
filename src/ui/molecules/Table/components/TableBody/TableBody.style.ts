@@ -10,6 +10,10 @@ export const Body = styled.tbody`
     &:nth-child(odd) {
       background-color: ${({ theme }) => theme.colors.N5};
     }
+
+    &:nth-child(even) {
+      background-color: ${({ theme }) => theme.colors.N3};
+    }
   }
 `;
 

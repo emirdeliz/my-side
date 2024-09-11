@@ -149,7 +149,7 @@ export const TablePagination = ({
   return (
     <PaginationContainer>
       <PaginationItemsContainer>
-        <Title>{'<<'}</Title>
+        <Title n3>{'<<'}</Title>
         {pages.map((page, index) => (
           <PaginationItem
             key={index}
@@ -160,7 +160,7 @@ export const TablePagination = ({
             {page.index ? page.index : '...'}
           </PaginationItem>
         ))}
-        <Title>{'>>'}</Title>
+        <Title n3>{'>>'}</Title>
       </PaginationItemsContainer>
     </PaginationContainer>
   );
