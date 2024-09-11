@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 .icon-align-justify:before { content: '\e800'; } /* '' */
 .icon-bank:before { content: '\e801'; } /* '' */
@@ -30,4 +31,6 @@
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-desktop:before { content: '\f108'; } /* '' */
 .icon-gamepad:before { content: '\f11b'; } /* '' */
+.icon-moon:before { content: '\f186'; } /* '' */
 .icon-cart-arrow-down:before { content: '\f218'; } /* '' */
+.icon-sun:before { content: '󨄚'; } /* '\e811a' */
