@@ -51,6 +51,7 @@ export const HomePage = () => {
       <Row>
         <Col.C8 tablet="12">
           <InputForm
+            dataTestId="input-search"
             value={filterName}
             onChange={e => {
               setPage(1);

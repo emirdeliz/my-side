@@ -13,9 +13,12 @@ export const ProductPage = () => {
 
   const initialize = useCallback(async () => {
     const { id } = router.query;
+    if (!id) {
+      return;
+    }
     const product = await getProduct(String(id));
     setProduct(product);
-  }, [getProduct, router.query]);
+  }, [getProduct, router.query.id]);
 
   useEffect(() => {
     initialize();
@@ -24,35 +27,35 @@ export const ProductPage = () => {
   return (
     <Form>
       <Row>
-        <Col.C1>
+        <Col.C2 tablet="2">
           <InputForm disabled value={product?.id}>ID</InputForm>
-        </Col.C1>
-        <Col.C6>
+        </Col.C2>
+        <Col.C5 tablet="10">
           <InputForm disabled value={product?.title}>Nome</InputForm>
-        </Col.C6>
-        <Col.C5>
+        </Col.C5>
+        <Col.C5 tablet="12">
           <InputForm disabled value={product?.price} currency>Preço</InputForm>
         </Col.C5>
       </Row>
       <Row>
-        <Col.C1>
+        <Col.C2 tablet="4">
           <InputForm disabled value={product?.brand}>Marca</InputForm>
-        </Col.C1>
-        <Col.C6>
+        </Col.C2>
+        <Col.C5 tablet="4">
           <InputForm disabled value={product?.model}>Modelo</InputForm>
-        </Col.C6>
-        <Col.C5>
+        </Col.C5>
+        <Col.C5 tablet="4">
           <InputForm disabled value={product?.color}>Cor</InputForm>
         </Col.C5>
       </Row>
       <Row>
-        <Col.C1>
+        <Col.C2 tablet="4">
           <InputForm disabled value={product?.category}>Categoria</InputForm>
-        </Col.C1>
-        <Col.C6>
+        </Col.C2>
+        <Col.C5 tablet="4">
           <InputForm disabled value={product?.popular ? 'Sim' : 'Não'}>Popular?</InputForm>
-        </Col.C6>
-        <Col.C5>
+        </Col.C5>
+        <Col.C5 tablet="4">
           <InputForm disabled value={product?.discount} currency>Desconto</InputForm>
         </Col.C5>
       </Row>
@@ -64,7 +67,7 @@ export const ProductPage = () => {
       <Row>
         <Col.C12>
           <Flex.Center wFull>
-            <Image src={product?.image || ''} alt={product?.title || ''} width={300} />
+            {product?.image && <Image src={product?.image} alt={product?.title || ''} width={300} height={300} />}
           </Flex.Center>
         </Col.C12>
       </Row>
