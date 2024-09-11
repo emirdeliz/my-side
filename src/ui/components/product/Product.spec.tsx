@@ -1,7 +1,7 @@
+import { act } from 'react';
 import { render } from '@test';
 import { screen, waitFor } from '@testing-library/react';
 import { ProductPage } from './ProductPage';
-import { act } from 'react';
 
 const productMock = {
   "id": 1,
